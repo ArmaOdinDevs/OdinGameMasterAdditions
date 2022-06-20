@@ -1,8 +1,5 @@
-/**
-Entity Skill Attribute for getting and setting varriables in Editor Attribute window
-*/
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
-class ODIN_SkillEditorAttribute : SCR_BaseValueListEditorAttribute
+class ODIN_GroupSkillEditorAttribute : SCR_BaseValueListEditorAttribute
 {
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
@@ -14,11 +11,11 @@ class ODIN_SkillEditorAttribute : SCR_BaseValueListEditorAttribute
 		if (!owner)
 			return null;
 		
-		SCR_AIConfigComponent AIConfigComp = SCR_AIConfigComponent.Cast(owner.FindComponent(SCR_AIConfigComponent));
-		if (!AIConfigComp)
+		SCR_AIConfigComponent AIConfigComponent = SCR_AIConfigComponent.Cast(owner.FindComponent(SCR_AIConfigComponent));
+		if (!AIConfigComponent)
 			return null;
 			
-		return SCR_BaseEditorAttributeVar.CreateFloat(Math.Round(AIConfigComp.m_Skill * 100));
+		return SCR_BaseEditorAttributeVar.CreateFloat(Math.Round(AIConfigComponent.m_Skill * 100));
 	}
 	
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
@@ -32,10 +29,10 @@ class ODIN_SkillEditorAttribute : SCR_BaseValueListEditorAttribute
 		if (!owner)
 			return;
 		
-		SCR_AIConfigComponent AIConfigComp = SCR_AIConfigComponent.Cast(owner.FindComponent(SCR_AIConfigComponent));
-		if (!AIConfigComp)
+		SCR_AIConfigComponent AIConfigComponent = SCR_AIConfigComponent.Cast(owner.FindComponent(SCR_AIConfigComponent));
+		if (!AIConfigComponent)
 			return;
 
-		AIConfigComp.m_Skill = var.GetFloat() / 100;
+		AIConfigComponent.m_Skill = var.GetFloat() / 100;
 	}
 };
